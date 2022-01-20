@@ -79,7 +79,7 @@ public class SaeEncounterPersisterIT  extends BaseModuleWebContextSensitiveTest 
 
         Context.openSession();
         Context.authenticate("admin", "test");
-        Collection<BahmniObservation> bahmniObservations = bahmniObsService.getObservationsForPatientProgram("ppuuid2", Arrays.asList(SAETemplateConstants.SAE_TEMPLATE));
+        Collection<BahmniObservation> bahmniObservations = bahmniObsService.getObservationsForPatientProgram("ppuuid2", Arrays.asList(SAETemplateConstants.SAE_TEMPLATE), null);
         Context.closeSession();
 
         BahmniObservation SAEObservation = bahmniObservations.stream().findFirst().get();
@@ -102,7 +102,7 @@ public class SaeEncounterPersisterIT  extends BaseModuleWebContextSensitiveTest 
 
         Context.openSession();
         Context.authenticate("admin", "test");
-        Collection<BahmniObservation> bahmniObservations = bahmniObsService.getObservationsForPatientProgram("ppuuid2", Arrays.asList(SAETemplateConstants.SAE_TEMPLATE));
+        Collection<BahmniObservation> bahmniObservations = bahmniObsService.getObservationsForPatientProgram("ppuuid2", Arrays.asList(SAETemplateConstants.SAE_TEMPLATE), null);
         Context.closeSession();
 
         BahmniObservation SAEObservation = bahmniObservations.stream().findFirst().get();
@@ -125,7 +125,7 @@ public class SaeEncounterPersisterIT  extends BaseModuleWebContextSensitiveTest 
 
         Context.openSession();
         Context.authenticate("admin", "test");
-        Collection<BahmniObservation> bahmniObservations = bahmniObsService.getObservationsForPatientProgram("ppuuid2", Arrays.asList(SAETemplateConstants.SAE_TEMPLATE));
+        Collection<BahmniObservation> bahmniObservations = bahmniObsService.getObservationsForPatientProgram("ppuuid2", Arrays.asList(SAETemplateConstants.SAE_TEMPLATE), null);
         Context.closeSession();
 
         BahmniObservation SAEObservation = bahmniObservations.stream().findFirst().get();
@@ -157,7 +157,7 @@ public class SaeEncounterPersisterIT  extends BaseModuleWebContextSensitiveTest 
 
         Context.openSession();
         Context.authenticate("admin", "test");
-        Collection<BahmniObservation> bahmniObservations = bahmniObsService.getObservationsForPatientProgram("ppuuid2", Arrays.asList(SAETemplateConstants.SAE_TEMPLATE));
+        Collection<BahmniObservation> bahmniObservations = bahmniObsService.getObservationsForPatientProgram("ppuuid2", Arrays.asList(SAETemplateConstants.SAE_TEMPLATE), null);
         Context.closeSession();
 
         BahmniObservation SAEObservation = bahmniObservations.stream().findFirst().get();
@@ -198,7 +198,7 @@ public class SaeEncounterPersisterIT  extends BaseModuleWebContextSensitiveTest 
 
         Context.openSession();
         Context.authenticate("admin", "test");
-        Collection<BahmniObservation> bahmniObservations = bahmniObsService.getObservationsForPatientProgram("ppuuid2", Arrays.asList(SAETemplateConstants.SAE_TEMPLATE));
+        Collection<BahmniObservation> bahmniObservations = bahmniObsService.getObservationsForPatientProgram("ppuuid2", Arrays.asList(SAETemplateConstants.SAE_TEMPLATE), null);
         Context.closeSession();
 
         BahmniObservation SAEObservation = bahmniObservations.stream().findFirst().get();
@@ -222,7 +222,7 @@ public class SaeEncounterPersisterIT  extends BaseModuleWebContextSensitiveTest 
 
         Context.openSession();
         Context.authenticate("admin", "test");
-        Collection<BahmniObservation> bahmniObservations = bahmniObsService.getObservationsForPatientProgram("ppuuid2", Arrays.asList(SAETemplateConstants.SAE_TEMPLATE));
+        Collection<BahmniObservation> bahmniObservations = bahmniObsService.getObservationsForPatientProgram("ppuuid2", Arrays.asList(SAETemplateConstants.SAE_TEMPLATE), null);
         Context.closeSession();
 
         BahmniObservation SAEObservation = bahmniObservations.stream().findFirst().get();
@@ -250,7 +250,7 @@ public class SaeEncounterPersisterIT  extends BaseModuleWebContextSensitiveTest 
 
         Context.openSession();
         Context.authenticate("admin", "test");
-        Collection<BahmniObservation> bahmniObservations = bahmniObsService.getObservationsForPatientProgram("ppuuid2", Arrays.asList(SAETemplateConstants.SAE_TEMPLATE));
+        Collection<BahmniObservation> bahmniObservations = bahmniObsService.getObservationsForPatientProgram("ppuuid2", Arrays.asList(SAETemplateConstants.SAE_TEMPLATE), null);
         Context.closeSession();
 
         BahmniObservation SAEObservation = bahmniObservations.stream().findFirst().get();
@@ -283,7 +283,7 @@ public class SaeEncounterPersisterIT  extends BaseModuleWebContextSensitiveTest 
 
         Context.openSession();
         Context.authenticate("admin", "test");
-        Collection<BahmniObservation> bahmniObservations = bahmniObsService.getObservationsForPatientProgram("ppuuid2", Arrays.asList(SAETemplateConstants.SAE_TEMPLATE));
+        Collection<BahmniObservation> bahmniObservations = bahmniObsService.getObservationsForPatientProgram("ppuuid2", Arrays.asList(SAETemplateConstants.SAE_TEMPLATE), null);
         Context.closeSession();
 
         BahmniObservation SAEObservation = bahmniObservations.stream().findFirst().get();
@@ -328,7 +328,7 @@ public class SaeEncounterPersisterIT  extends BaseModuleWebContextSensitiveTest 
 
         Context.openSession();
         Context.authenticate("admin", "test");
-        Collection<BahmniObservation> bahmniObservations = bahmniObsService.getObservationsForPatientProgram("ppuuid2", Arrays.asList(SAETemplateConstants.SAE_TEMPLATE));
+        Collection<BahmniObservation> bahmniObservations = bahmniObsService.getObservationsForPatientProgram("ppuuid2", Arrays.asList(SAETemplateConstants.SAE_TEMPLATE), null);
         Context.closeSession();
 
         BahmniObservation SAEObservation = bahmniObservations.stream().findFirst().get();
@@ -363,7 +363,7 @@ public class SaeEncounterPersisterIT  extends BaseModuleWebContextSensitiveTest 
 
         Context.openSession();
         Context.authenticate("admin", "test");
-        Collection<BahmniObservation> bahmniObservations = bahmniObsService.getObservationsForPatientProgram("ppuuid2", Arrays.asList(SAETemplateConstants.SAE_TEMPLATE));
+        Collection<BahmniObservation> bahmniObservations = bahmniObsService.getObservationsForPatientProgram("ppuuid2", Arrays.asList(SAETemplateConstants.SAE_TEMPLATE), null);
         Context.closeSession();
 
         BahmniObservation SAEObservation = bahmniObservations.stream().findFirst().get();
@@ -409,7 +409,7 @@ public class SaeEncounterPersisterIT  extends BaseModuleWebContextSensitiveTest 
 
         Context.openSession();
         Context.authenticate("admin", "test");
-        Collection<BahmniObservation> bahmniObservations = bahmniObsService.getObservationsForPatientProgram("ppuuid2", Arrays.asList(SAETemplateConstants.SAE_TEMPLATE));
+        Collection<BahmniObservation> bahmniObservations = bahmniObsService.getObservationsForPatientProgram("ppuuid2", Arrays.asList(SAETemplateConstants.SAE_TEMPLATE), null);
         Context.closeSession();
 
         BahmniObservation SAEObservation = bahmniObservations.stream().findFirst().get();

@@ -3,7 +3,8 @@ package org.openmrs.module.endtb.admin.controller;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 import org.apache.commons.io.FileUtils;
-import org.apache.log4j.Logger;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.bahmni.csv.CSVFile;
 import org.bahmni.csv.EntityPersister;
 import org.bahmni.fileimport.FileImporter;
@@ -34,7 +35,7 @@ import java.util.Date;
 @Controller
 public class EndTBAdminImportController extends BaseRestController {
     private final String baseUrl = "/rest/" + RestConstants.VERSION_1 + "/endtb/admin/upload";
-    private static Logger logger = Logger.getLogger(EndTBAdminImportController.class);
+    private static Logger logger = LogManager.getLogger(EndTBAdminImportController.class);
 
     public final String YYYY_MM_DD_HH_MM_SS = "_yyyy-MM-dd_HH:mm:ss";
 

@@ -50,7 +50,7 @@ public class BahmniSaeEncounterTransactionImportService {
 
     private BahmniObservation getBahmniObservation(SaeEncounterRow saeEncounterRow, String patientProgramUuid) {
         BahmniObservation observation = null;
-        Collection<BahmniObservation> bahmniObservations = bahmniObsService.getObservationsForPatientProgram(patientProgramUuid, Arrays.asList(SAETemplateConstants.SAE_TEMPLATE));
+        Collection<BahmniObservation> bahmniObservations = bahmniObsService.getObservationsForPatientProgram(patientProgramUuid, Arrays.asList(SAETemplateConstants.SAE_TEMPLATE), null);
         if (CollectionUtils.isNotEmpty(bahmniObservations)) {
             for (BahmniObservation bahmniObservation : bahmniObservations) {
                 Map<String, Object> groupMembers = getGroupMembersOfConceptNames(bahmniObservation);
