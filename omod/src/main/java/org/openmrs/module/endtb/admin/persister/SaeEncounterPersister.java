@@ -2,7 +2,8 @@ package org.openmrs.module.endtb.admin.persister;
 
 import org.apache.commons.collections.CollectionUtils;
 import org.apache.commons.lang.StringUtils;
-import org.apache.log4j.Logger;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.bahmni.csv.EntityPersister;
 import org.bahmni.csv.Messages;
 import org.bahmni.module.admin.csv.persister.EncounterPersister;
@@ -18,7 +19,6 @@ import org.openmrs.module.bahmniemrapi.encountertransaction.service.BahmniEncoun
 import org.openmrs.module.endtb.admin.constants.SAETemplateConstants;
 import org.openmrs.module.endtb.admin.encounter.BahmniSaeEncounterTransactionImportService;
 import org.openmrs.module.endtb.admin.models.SaeEncounterRow;
-import org.openmrs.module.endtb.admin.models.SaeTBDrugTreatmentRow;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -43,7 +43,7 @@ public class SaeEncounterPersister implements EntityPersister<SaeEncounterRow> {
     private UserContext userContext;
     private String loginUuid;
 
-    private static final Logger log = Logger.getLogger(EncounterPersister.class);
+    private static final Logger log = LogManager.getLogger(EncounterPersister.class);
 
     public void init(UserContext userContext, String loginUuid) {
         this.userContext = userContext;

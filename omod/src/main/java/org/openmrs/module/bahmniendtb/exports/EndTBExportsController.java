@@ -1,7 +1,8 @@
 package org.openmrs.module.bahmniendtb.exports;
 
 import org.apache.commons.io.IOUtils;
-import org.apache.log4j.Logger;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.openmrs.Privilege;
 import org.openmrs.api.APIAuthenticationException;
 import org.openmrs.api.context.Context;
@@ -22,7 +23,7 @@ import java.io.FileInputStream;
 @Controller
 public class EndTBExportsController extends BaseRestController implements ResourceLoaderAware {
 
-	private static Logger logger = Logger.getLogger(EndTBExportsController.class);
+	private static Logger logger = LogManager.getLogger(EndTBExportsController.class);
 	private static final String ENDTB_EXPORTS_LOCATION = "endtb.exports.location";
 
 	private final String baseUrl = "/rest/" + RestConstants.VERSION_1 + "/endtb";
@@ -49,7 +50,7 @@ public class EndTBExportsController extends BaseRestController implements Resour
 			response.setHeader("Content-Disposition", "attachment; filename=\"" + filename + "\"");
 			response.flushBuffer();
 		} catch (Exception e) {
-			logger.error("Unable to send the file ["+filename+"]",e);
+			logger.error("Unable to send the file [{}]: {}",filename,e);
 		}
 	}
 

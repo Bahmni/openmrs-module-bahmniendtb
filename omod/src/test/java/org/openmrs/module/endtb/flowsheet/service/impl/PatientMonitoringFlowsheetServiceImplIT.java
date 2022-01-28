@@ -26,7 +26,7 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import java.text.SimpleDateFormat;
 import java.util.*;
 
-import static org.bahmni.module.bahmnicore.mapper.PatientIdentifierMapper.EMR_PRIMARY_IDENTIFIER_TYPE;
+import static org.bahmni.module.bahmnicore.mapper.PatientIdentifierMapper.BAHMNI_PRIMARY_IDENTIFIER_TYPE;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 
@@ -62,7 +62,7 @@ public class PatientMonitoringFlowsheetServiceImplIT extends BaseModuleWebContex
     @Test
     public void shouldSetFlowsheetAttributes() {
         BahmniPatientProgram bahmniPatientProgram = (BahmniPatientProgram) bahmniProgramWorkflowService.getPatientProgramByUuid("dfdfoifo-dkcd-475d-b939-6d82327f36a3");
-        PatientIdentifierType patientIdentifierType = patientService.getPatientIdentifierTypeByUuid(administrationService.getGlobalProperty(EMR_PRIMARY_IDENTIFIER_TYPE));
+        PatientIdentifierType patientIdentifierType = patientService.getPatientIdentifierTypeByUuid(administrationService.getGlobalProperty(BAHMNI_PRIMARY_IDENTIFIER_TYPE));
         OrderType orderType = orderService.getOrderTypeByUuid(OrderType.DRUG_ORDER_TYPE_UUID);
         Set<Concept> conceptsForDrugs = new HashSet<>();
         conceptsForDrugs.add(conceptService.getConceptByName(EndTBConstants.DRUG_BDQ));
