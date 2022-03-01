@@ -133,7 +133,7 @@
         <dependency>
             <groupId>org.ict4h.openmrs</groupId>
             <artifactId>openmrs-atomfeed-api</artifactId>
-            <version>2.5.4</version>
+            <version>2.6.1</version>
             <scope>test</scope>
         </dependency>
         <!-- End OpenMRS core -->
@@ -166,12 +166,12 @@
         <dependency>
             <groupId>org.bahmni.module</groupId>
             <artifactId>bahmni-migrator</artifactId>
-            <version>${bahmniVersion}</version>
+            <version>${bahmniJavaUtilsVersion}</version>
         </dependency>
         <dependency>
             <groupId>org.bahmni.module</groupId>
             <artifactId>file-uploader</artifactId>
-            <version>${bahmniVersion}</version>
+            <version>${bahmniJavaUtilsVersion}</version>
         </dependency>
         <dependency>
             <groupId>org.bahmni.module</groupId>
