@@ -166,12 +166,12 @@
         <dependency>
             <groupId>org.bahmni.module</groupId>
             <artifactId>bahmni-migrator</artifactId>
-            <version>${bahmniVersion}</version>
+            <version>${bahmniJavaUtilsVersion}</version>
         </dependency>
         <dependency>
             <groupId>org.bahmni.module</groupId>
             <artifactId>file-uploader</artifactId>
-            <version>${bahmniVersion}</version>
+            <version>${bahmniJavaUtilsVersion}</version>
         </dependency>
         <dependency>
             <groupId>org.bahmni.module</groupId>
