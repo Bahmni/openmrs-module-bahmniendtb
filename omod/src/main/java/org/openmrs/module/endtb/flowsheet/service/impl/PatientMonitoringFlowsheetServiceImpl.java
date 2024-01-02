@@ -20,8 +20,6 @@ import org.bahmni.flowsheet.definition.models.MilestoneDefinition;
 import org.bahmni.flowsheet.definition.models.QuestionDefinition;
 import org.bahmni.module.bahmnicore.dao.ObsDao;
 import org.bahmni.module.bahmnicore.dao.OrderDao;
-import org.bahmni.module.bahmnicore.model.bahmniPatientProgram.BahmniPatientProgram;
-import org.bahmni.module.bahmnicore.model.bahmniPatientProgram.PatientProgramAttribute;
 import org.bahmni.module.bahmnicore.service.BahmniConceptService;
 import org.openmrs.*;
 import org.openmrs.api.context.Context;
@@ -136,22 +134,22 @@ public class PatientMonitoringFlowsheetServiceImpl implements PatientMonitoringF
 
 
     @Override
-    public FlowsheetAttribute getFlowsheetAttributesForPatientProgram(BahmniPatientProgram bahmniPatientProgram, PatientIdentifierType primaryIdentifierType, OrderType orderType, Set<Concept> concepts) {
+    public FlowsheetAttribute getFlowsheetAttributesForPatientProgram(PatientProgram patientPrograms, PatientIdentifierType primaryIdentifierType, OrderType orderType, Set<Concept> concepts) {
         FlowsheetAttribute flowsheetAttribute = new FlowsheetAttribute();
-        List<Obs> startDateConceptObs = obsDao.getObsByPatientProgramUuidAndConceptNames(bahmniPatientProgram.getUuid(), Arrays.asList(EndTBConstants.TI_TREATMENT_START_DATE), null, null, null, null);
+        List<Obs> startDateConceptObs = obsDao.getObsByPatientProgramUuidAndConceptNames(patientPrograms.getUuid(), Arrays.asList(EndTBConstants.TI_TREATMENT_START_DATE), null, null, null, null);
         Date startDate = null;
         if (CollectionUtils.isNotEmpty(startDateConceptObs)) {
             startDate = startDateConceptObs.get(0).getValueDate();
         }
-        Date newDrugTreatmentStartDate = getNewDrugTreatmentStartDate(bahmniPatientProgram.getUuid(), orderType, concepts);
-        List<Obs> consentForEndTbStudyObs = obsDao.getObsByPatientProgramUuidAndConceptNames(bahmniPatientProgram.getUuid(), Arrays.asList(EndTBConstants.FSN_TI_ENDTB_STUDY_CONSENT_QUESTION), null, null, null, null);
+        Date newDrugTreatmentStartDate = getNewDrugTreatmentStartDate(patientPrograms.getUuid(), orderType, concepts);
+        List<Obs> consentForEndTbStudyObs = obsDao.getObsByPatientProgramUuidAndConceptNames(patientPrograms.getUuid(), Arrays.asList(EndTBConstants.FSN_TI_ENDTB_STUDY_CONSENT_QUESTION), null, null, null, null);
         String consentForEndTbStudy = null;
 
         if (CollectionUtils.isNotEmpty(consentForEndTbStudyObs)) {
             consentForEndTbStudy = consentForEndTbStudyObs.get(0).getValueCoded().getShortNameInLocale(Context.getUserContext().getLocale()).getName();
         }
 
-        List<Obs> hivSeroStatusObs = obsDao.getObsByPatientProgramUuidAndConceptNames(bahmniPatientProgram.getUuid(), Arrays.asList(EndTBConstants.BASLINE_HIV_SEROSTATUS_RESULT, EndTBConstants.LAB_HIV_TEST_RESULT), null, null, null, null);
+        List<Obs> hivSeroStatusObs = obsDao.getObsByPatientProgramUuidAndConceptNames(patientPrograms.getUuid(), Arrays.asList(EndTBConstants.BASLINE_HIV_SEROSTATUS_RESULT, EndTBConstants.LAB_HIV_TEST_RESULT), null, null, null, null);
         String hivStatus = null;
 
         if (CollectionUtils.isNotEmpty(hivSeroStatusObs)) {
@@ -164,14 +162,14 @@ public class PatientMonitoringFlowsheetServiceImpl implements PatientMonitoringF
         if (startDate != null) {
             Date minDate = DateUtils.addDays(startDate, -90);
             Date maxDate = DateUtils.addDays(startDate, 30);
-            List<Obs> baslineXrayObs = obsDao.getObsByPatientProgramUuidAndConceptNames(bahmniPatientProgram.getUuid(), Arrays.asList(EndTBConstants.XRAY_EXTENT_OF_DISEASE), null, null, null, null);
+            List<Obs> baslineXrayObs = obsDao.getObsByPatientProgramUuidAndConceptNames(patientPrograms.getUuid(), Arrays.asList(EndTBConstants.XRAY_EXTENT_OF_DISEASE), null, null, null, null);
             baselineXRayStatus = isObsDatePresentWithinDateRange(minDate, maxDate, baslineXrayObs);
         }
 
         flowsheetAttribute.setNewDrugTreatmentStartDate(newDrugTreatmentStartDate);
         flowsheetAttribute.setMdrtbTreatmentStartDate(startDate);
-        flowsheetAttribute.setTreatmentRegistrationNumber(getProgramAttribute(bahmniPatientProgram, EndTBConstants.PROGRAM_ATTRIBUTE_REG_NO));
-        flowsheetAttribute.setPatientEMRID(bahmniPatientProgram.getPatient().getPatientIdentifier(primaryIdentifierType).getIdentifier());
+        flowsheetAttribute.setTreatmentRegistrationNumber(getProgramAttribute(patientPrograms, EndTBConstants.PROGRAM_ATTRIBUTE_REG_NO));
+        flowsheetAttribute.setPatientEMRID(patientPrograms.getPatient().getPatientIdentifier(primaryIdentifierType).getIdentifier());
         flowsheetAttribute.setConsentForEndtbStudy(consentForEndTbStudy);
         flowsheetAttribute.setHivStatus(hivStatus);
         flowsheetAttribute.setBaselineXRayStatus(baselineXRayStatus);
@@ -236,8 +234,8 @@ public class PatientMonitoringFlowsheetServiceImpl implements PatientMonitoringF
         return null;
     }
 
-    private String getProgramAttribute(BahmniPatientProgram bahmniPatientProgram, String attribute) {
-        for (PatientProgramAttribute patientProgramAttribute : bahmniPatientProgram.getActiveAttributes()) {
+    private String getProgramAttribute(PatientProgram patientPrograms, String attribute) {
+        for (PatientProgramAttribute patientProgramAttribute : patientPrograms.getActiveAttributes()) {
             if (patientProgramAttribute.getAttributeType().getName().equals(attribute))
                 return patientProgramAttribute.getValueReference();
         }

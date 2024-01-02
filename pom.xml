@@ -11,21 +11,22 @@
     <description>Modules to override features in bahmni-core by implementors</description>
 
     <properties>
-        <reportingModuleVersion>0.10.4</reportingModuleVersion>
-        <openMRSWebServicesVersion>2.17</openMRSWebServicesVersion>
-        <openMRSVersion>2.1.6</openMRSVersion>
+        <reportingModuleVersion>1.23.0</reportingModuleVersion>
+        <openMRSWebServicesVersion>2.29.0</openMRSWebServicesVersion>
+        <openMRSVersion>2.5.7</openMRSVersion>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <calculationModuleVersion>1.3-SNAPSHOT</calculationModuleVersion>
         <serializationXstreamModuleVersion>0.2.12</serializationXstreamModuleVersion>
         <bahmniVersion>0.94-SNAPSHOT</bahmniVersion>
-        <bahmniJavaUtilsVersion>0.94.2</bahmniJavaUtilsVersion>
+        <bahmniJavaUtilsVersion>0.94.4-SNAPSHOT</bahmniJavaUtilsVersion>
         <bahmniEndTbVersion>2.0.0</bahmniEndTbVersion>
-        <emrapi-omod.version>1.20</emrapi-omod.version>
+        <emrapi-omod.version>1.33.0</emrapi-omod.version>
         <episodes.version>1.0-SNAPSHOT</episodes.version>
         <legacyuiVersion>1.0</legacyuiVersion>
-        <dataintegrityVersion>4.2.3</dataintegrityVersion>
+        <dataintegrityVersion>4.4.4</dataintegrityVersion>
         <uiframeworkVersion>3.3.1</uiframeworkVersion>
         <log4jVersion>2.17.1</log4jVersion>
+        <metadatamapping.version>1.5.0</metadatamapping.version>
     </properties>
 
     <organization>
@@ -46,14 +47,14 @@
             <dependency>
                 <groupId>org.openmrs.module</groupId>
                 <artifactId>emrapi-api-1.12</artifactId>
-                <version>1.17</version>
+                <version>${emrapi-omod.version}</version>
                 <scope>provided</scope>
             </dependency>
 
             <dependency>
                 <groupId>org.openmrs.module</groupId>
                 <artifactId>emrapi-api</artifactId>
-                <version>1.17</version>
+                <version>${emrapi-omod.version}</version>
                 <scope>provided</scope>
             </dependency>
 
@@ -160,7 +161,7 @@
             <dependency>
                 <groupId>org.openmrs.module</groupId>
                 <artifactId>providermanagement-api</artifactId>
-                <version>1.1.3</version>
+                <version>2.13.0</version>
                 <scope>test</scope>
             </dependency>
 

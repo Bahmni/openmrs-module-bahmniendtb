@@ -2,7 +2,6 @@ package org.openmrs.module.endtb.flowsheet.service;
 
 import org.bahmni.flowsheet.config.FlowsheetConfig;
 import org.bahmni.flowsheet.definition.models.FlowsheetDefinition;
-import org.bahmni.module.bahmnicore.model.bahmniPatientProgram.BahmniPatientProgram;
 import org.openmrs.Concept;
 import org.openmrs.OrderType;
 import org.openmrs.PatientIdentifierType;
@@ -16,7 +15,7 @@ import java.util.Set;
 public interface PatientMonitoringFlowsheetService {
     FlowsheetUI getFlowsheetForPatientProgram(PatientProgram patientProgram, Date startDate, Date endDate, String configFilePath) throws Exception;
 
-    FlowsheetAttribute getFlowsheetAttributesForPatientProgram(BahmniPatientProgram bahmniPatientProgram, PatientIdentifierType patientIdentifierType, OrderType orderType, Set<Concept> concepts);
+    FlowsheetAttribute getFlowsheetAttributesForPatientProgram(PatientProgram patientPrograms, PatientIdentifierType patientIdentifierType, OrderType orderType, Set<Concept> concepts);
 
     Date getStartDateForDrugConcepts(String patientProgramUuid, Set<String> drugConcepts, OrderType orderType);
 

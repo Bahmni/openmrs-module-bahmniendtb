@@ -3,7 +3,6 @@ package org.openmrs.module.endtb.flowsheet.service.impl;
 
 import org.bahmni.flowsheet.api.models.Milestone;
 import org.bahmni.flowsheet.ui.FlowsheetUI;
-import org.bahmni.module.bahmnicore.model.bahmniPatientProgram.BahmniPatientProgram;
 import org.bahmni.module.bahmnicore.service.BahmniProgramWorkflowService;
 import org.junit.Before;
 import org.junit.Test;
@@ -61,14 +60,14 @@ public class PatientMonitoringFlowsheetServiceImplIT extends BaseModuleWebContex
 
     @Test
     public void shouldSetFlowsheetAttributes() {
-        BahmniPatientProgram bahmniPatientProgram = (BahmniPatientProgram) bahmniProgramWorkflowService.getPatientProgramByUuid("dfdfoifo-dkcd-475d-b939-6d82327f36a3");
+        PatientProgram patientPrograms = bahmniProgramWorkflowService.getPatientProgramByUuid("dfdfoifo-dkcd-475d-b939-6d82327f36a3");
         PatientIdentifierType patientIdentifierType = patientService.getPatientIdentifierTypeByUuid(administrationService.getGlobalProperty(BAHMNI_PRIMARY_IDENTIFIER_TYPE));
         OrderType orderType = orderService.getOrderTypeByUuid(OrderType.DRUG_ORDER_TYPE_UUID);
         Set<Concept> conceptsForDrugs = new HashSet<>();
         conceptsForDrugs.add(conceptService.getConceptByName(EndTBConstants.DRUG_BDQ));
         conceptsForDrugs.add(conceptService.getConceptByName(EndTBConstants.DRUG_DELAMANID));
 
-        FlowsheetAttribute flowsheetAttribute = patientMonitoringFlowsheetService.getFlowsheetAttributesForPatientProgram(bahmniPatientProgram, patientIdentifierType, orderType, conceptsForDrugs);
+        FlowsheetAttribute flowsheetAttribute = patientMonitoringFlowsheetService.getFlowsheetAttributesForPatientProgram(patientPrograms, patientIdentifierType, orderType, conceptsForDrugs);
 
         assertEquals("ARM10021", flowsheetAttribute.getPatientEMRID());
         assertEquals("2016-09-16 00:00:00.0", flowsheetAttribute.getMdrtbTreatmentStartDate().toString());

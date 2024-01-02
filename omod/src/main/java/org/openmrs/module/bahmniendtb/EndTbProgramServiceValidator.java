@@ -1,11 +1,10 @@
 package org.openmrs.module.bahmniendtb;
 
 import org.apache.commons.collections.CollectionUtils;
-import org.bahmni.module.bahmnicore.model.bahmniPatientProgram.BahmniPatientProgram;
-import org.bahmni.module.bahmnicore.model.bahmniPatientProgram.PatientProgramAttribute;
 import org.bahmni.module.bahmnicore.service.BahmniProgramServiceValidator;
 import org.bahmni.module.bahmnicore.service.BahmniProgramWorkflowService;
 import org.openmrs.PatientProgram;
+import org.openmrs.PatientProgramAttribute;
 import org.openmrs.api.APIException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -25,19 +24,19 @@ public class EndTbProgramServiceValidator implements BahmniProgramServiceValidat
 
     @Override
     public void validate(PatientProgram patientProgram) throws APIException {
-        for (PatientProgramAttribute patientProgramAttribute : ((BahmniPatientProgram) patientProgram).getAttributes()) {
+        for (PatientProgramAttribute patientProgramAttribute : patientProgram.getAttributes()) {
             if (PROGRAM_ATTRIBUTE_REG_NO.equals(patientProgramAttribute.getAttributeType().getName())) {
-                List<BahmniPatientProgram> bahmniPatientPrograms = bahmniProgramWorkflowService.getPatientProgramByAttributeNameAndValue(PROGRAM_ATTRIBUTE_REG_NO, (String) patientProgramAttribute.getValue());
-                if (isPatientProgramPresent(patientProgram, bahmniPatientPrograms)) {
+                List<PatientProgram> patientPrograms = bahmniProgramWorkflowService.getPatientProgramByAttributeNameAndValue(PROGRAM_ATTRIBUTE_REG_NO, (String) patientProgramAttribute.getValue());
+                if (isPatientProgramPresent(patientProgram, patientPrograms)) {
                     throw new APIException("Registration number is already used for another Treatment");
                 }
             }
         }
     }
 
-    private boolean isPatientProgramPresent(PatientProgram patientProgram, List<BahmniPatientProgram> bahmniPatientPrograms) {
+    private boolean isPatientProgramPresent(PatientProgram patientProgram, List<PatientProgram> bahmniPatientPrograms) {
         if(CollectionUtils.isNotEmpty(bahmniPatientPrograms)) {
-            for(BahmniPatientProgram bahmniPatientProgram : bahmniPatientPrograms) {
+            for(PatientProgram bahmniPatientProgram : bahmniPatientPrograms) {
                 if(!bahmniPatientProgram.getUuid().equals(patientProgram.getUuid())) {
                     return true;
                 }
