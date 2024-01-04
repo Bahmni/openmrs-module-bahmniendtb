@@ -1,13 +1,12 @@
 package org.openmrs.module.bahmniendtb;
 
-import org.bahmni.module.bahmnicore.model.bahmniPatientProgram.BahmniPatientProgram;
-import org.bahmni.module.bahmnicore.model.bahmniPatientProgram.PatientProgramAttribute;
-import org.bahmni.module.bahmnicore.model.bahmniPatientProgram.ProgramAttributeType;
 import org.bahmni.module.bahmnicore.service.BahmniProgramWorkflowService;
 import org.junit.Before;
 import org.junit.Test;
 import org.mockito.Mock;
 import org.openmrs.PatientProgram;
+import org.openmrs.PatientProgramAttribute;
+import org.openmrs.ProgramAttributeType;
 import org.openmrs.api.APIException;
 
 import java.util.Arrays;
@@ -33,7 +32,7 @@ public class EndTbProgramServiceValidatorTest {
 
     @Test(expected=APIException.class)
     public void shouldThrowExceptionIfRegistrationNumberAlreadyPresentForAProgram() {
-        when(bahmniProgramWorkflowService.getPatientProgramByAttributeNameAndValue(any(String.class), any(String.class))).thenReturn(Arrays.asList((BahmniPatientProgram) getPatientProgram()));
+        when(bahmniProgramWorkflowService.getPatientProgramByAttributeNameAndValue(any(String.class), any(String.class))).thenReturn(Arrays.asList(getPatientProgram()));
         endTbProgramServiceValidator.validate(getPatientProgram());
     }
 
@@ -45,9 +44,9 @@ public class EndTbProgramServiceValidatorTest {
         patientProgramAttribute.setValue("123");
         patientProgramAttribute.setAttributeType(programAttributeType);
 
-        BahmniPatientProgram bahmniPatientProgram = new BahmniPatientProgram();
-        bahmniPatientProgram.setAttribute(patientProgramAttribute);
+        PatientProgram patientPrograms = new PatientProgram();
+        patientPrograms.setAttribute(patientProgramAttribute);
 
-        return bahmniPatientProgram;
+        return patientPrograms;
     }
 }

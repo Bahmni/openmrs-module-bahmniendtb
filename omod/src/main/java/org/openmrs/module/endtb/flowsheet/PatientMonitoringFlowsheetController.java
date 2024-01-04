@@ -2,11 +2,11 @@ package org.openmrs.module.endtb.flowsheet;
 
 import org.apache.commons.lang3.StringUtils;
 import org.bahmni.flowsheet.ui.FlowsheetUI;
-import org.bahmni.module.bahmnicore.model.bahmniPatientProgram.BahmniPatientProgram;
 import org.bahmni.module.bahmnicore.service.BahmniProgramWorkflowService;
 import org.openmrs.Concept;
 import org.openmrs.OrderType;
 import org.openmrs.PatientIdentifierType;
+import org.openmrs.PatientProgram;
 import org.openmrs.api.AdministrationService;
 import org.openmrs.api.ConceptService;
 import org.openmrs.api.OrderService;
@@ -61,13 +61,13 @@ public class PatientMonitoringFlowsheetController extends BaseRestController {
     public FlowsheetUI retrievePatientFlowSheet(@RequestParam("patientProgramUuid") String patientProgramUuid,
                                                 @RequestParam(value="startDate", required = false) String startDateStr,
                                                 @RequestParam(value="stopDate", required = false) String endDateStr) throws Exception {
-        BahmniPatientProgram bahmniPatientProgram = (BahmniPatientProgram) Context.getService(BahmniProgramWorkflowService.class).getPatientProgramByUuid(patientProgramUuid);
+        PatientProgram patientPrograms = Context.getService(BahmniProgramWorkflowService.class).getPatientProgramByUuid(patientProgramUuid);
 
 
         Date startDate = StringUtils.isNotEmpty(startDateStr) ? new SimpleDateFormat("yyyy-MM-dd").parse(startDateStr) : null;
         Date endDate = StringUtils.isNotEmpty(endDateStr) ? new SimpleDateFormat("yyyy-MM-dd").parse(endDateStr) : null;
 
-        return patientMonitoringFlowsheetService.getFlowsheetForPatientProgram(bahmniPatientProgram, startDate, endDate, Context.getAdministrationService().getGlobalProperty(PATIENT_MONITORING_CONFIG_LOCATION));
+        return patientMonitoringFlowsheetService.getFlowsheetForPatientProgram(patientPrograms, startDate, endDate, Context.getAdministrationService().getGlobalProperty(PATIENT_MONITORING_CONFIG_LOCATION));
     }
 
     @RequestMapping(value= baseUrl + "/patientFlowsheetAttributes", method = RequestMethod.GET)
@@ -76,13 +76,13 @@ public class PatientMonitoringFlowsheetController extends BaseRestController {
 
         PatientIdentifierType primaryIdentifierType = patientService.getPatientIdentifierTypeByUuid(administrationService.getGlobalProperty(EMR_PRIMARY_IDENTIFIER_TYPE));
         OrderType orderType = orderService.getOrderTypeByUuid(OrderType.DRUG_ORDER_TYPE_UUID);
-        BahmniPatientProgram bahmniPatientProgram = (BahmniPatientProgram) Context.getService(BahmniProgramWorkflowService.class).getPatientProgramByUuid(patientProgramUuid);
+        PatientProgram patientPrograms = Context.getService(BahmniProgramWorkflowService.class).getPatientProgramByUuid(patientProgramUuid);
 
         Set<Concept> conceptsForDrugs = new HashSet<>();
         conceptsForDrugs.add(conceptService.getConceptByName(EndTBConstants.DRUG_BDQ));
         conceptsForDrugs.add(conceptService.getConceptByName(EndTBConstants.DRUG_DELAMANID));
 
-        return patientMonitoringFlowsheetService.getFlowsheetAttributesForPatientProgram(bahmniPatientProgram, primaryIdentifierType, orderType, conceptsForDrugs);
+        return patientMonitoringFlowsheetService.getFlowsheetAttributesForPatientProgram(patientPrograms, primaryIdentifierType, orderType, conceptsForDrugs);
     }
 
     @RequestMapping(value= baseUrl + "/startDateForDrugs", method = RequestMethod.GET)

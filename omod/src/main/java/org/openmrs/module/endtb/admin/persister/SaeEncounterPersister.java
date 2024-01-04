@@ -7,9 +7,9 @@ import org.apache.logging.log4j.Logger;
 import org.bahmni.csv.EntityPersister;
 import org.bahmni.csv.Messages;
 import org.bahmni.module.admin.csv.persister.EncounterPersister;
-import org.bahmni.module.bahmnicore.model.bahmniPatientProgram.BahmniPatientProgram;
 import org.bahmni.module.bahmnicore.service.BahmniProgramWorkflowService;
 import org.openmrs.Patient;
+import org.openmrs.PatientProgram;
 import org.openmrs.Visit;
 import org.openmrs.api.VisitService;
 import org.openmrs.api.context.Context;
@@ -84,22 +84,22 @@ public class SaeEncounterPersister implements EntityPersister<SaeEncounterRow> {
 
                 importConditions(saeEncounterRow);
 
-                List<BahmniPatientProgram> bahmniPatientPrograms = bahmniProgramWorkflowService.getPatientProgramByAttributeNameAndValue(REGISTRATION_NUMBER, saeEncounterRow.registrationNumber);
+                List<PatientProgram> patientPrograms = bahmniProgramWorkflowService.getPatientProgramByAttributeNameAndValue(REGISTRATION_NUMBER, saeEncounterRow.registrationNumber);
 
-                if(CollectionUtils.isEmpty(bahmniPatientPrograms)) {
+                if(CollectionUtils.isEmpty(patientPrograms)) {
                     return noMatchingPatientProgramFound(saeEncounterRow);
                 }
 
-                BahmniPatientProgram bahmniPatientProgram = bahmniPatientPrograms.get(0);
-                Patient patient = bahmniPatientProgram.getPatient();
+                PatientProgram patientProgram = patientPrograms.get(0);
+                Patient patient = patientProgram.getPatient();
                 List<Visit> visits = visitService.getVisitsByPatient(patient, false, false);
                 Visit latestVisit = visits.get(0);
 
-                BahmniEncounterTransaction bahmniEncounterTransaction = bahmniSaeEncounterTransactionImportService.getSaeEncounterTransaction(saeEncounterRow, patient, bahmniPatientProgram.getUuid());
+                BahmniEncounterTransaction bahmniEncounterTransaction = bahmniSaeEncounterTransactionImportService.getSaeEncounterTransaction(saeEncounterRow, patient, patientProgram.getUuid());
                 if(bahmniEncounterTransaction == null) {
                     return noMatchingSaeFormFound(saeEncounterRow);
                 }
-                bahmniEncounterTransaction.setPatientProgramUuid(bahmniPatientProgram.getUuid());
+                bahmniEncounterTransaction.setPatientProgramUuid(patientProgram.getUuid());
                 bahmniEncounterTransaction.setLocationUuid(loginUuid);
                 bahmniEncounterTransactionService.save(bahmniEncounterTransaction, patient, latestVisit.getStartDatetime(), latestVisit.getStopDatetime());
                 return new Messages();
