@@ -20,7 +20,7 @@
         <bahmniVersion>0.94-SNAPSHOT</bahmniVersion>
         <bahmniJavaUtilsVersion>0.94.4-SNAPSHOT</bahmniJavaUtilsVersion>
         <bahmniEndTbVersion>2.0.0</bahmniEndTbVersion>
-        <emrapi-omod.version>1.33.0</emrapi-omod.version>
+        <emrapi-omod.version>1.35.0-SNAPSHOT</emrapi-omod.version>
         <episodes.version>1.0-SNAPSHOT</episodes.version>
         <legacyuiVersion>1.0</legacyuiVersion>
         <dataintegrityVersion>4.4.4</dataintegrityVersion>
